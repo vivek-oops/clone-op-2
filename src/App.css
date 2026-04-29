@@ -1,0 +1,4 @@
+/* App-level resets — no layout constraints on #root */
+#root {
+  min-height: 100dvh;
+}
