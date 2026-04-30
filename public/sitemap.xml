@@ -1,40 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <!-- Core pages -->
+
+  <!-- Core -->
   <url>
     <loc>https://oopsipleasured.in/</loc>
-    <lastmod>2026-04-09</lastmod>
+    <lastmod>2026-04-29</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
+
+  <!-- Blog -->
   <url>
     <loc>https://oopsipleasured.in/blog</loc>
-    <lastmod>2026-04-09</lastmod>
+    <lastmod>2026-04-29</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
+
+  <!-- About -->
   <url>
-    <loc>https://oopsipleasured.in/auth</loc>
-    <lastmod>2026-04-09</lastmod>
+    <loc>https://oopsipleasured.in/about</loc>
+    <lastmod>2026-04-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Support / Legal -->
+  <url>
+    <loc>https://oopsipleasured.in/shipping</loc>
+    <lastmod>2026-04-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://oopsipleasured.in/cart</loc>
-    <lastmod>2026-04-09</lastmod>
-    <changefreq>always</changefreq>
+    <loc>https://oopsipleasured.in/returns</loc>
+    <lastmod>2026-04-29</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://oopsipleasured.in/checkout</loc>
-    <lastmod>2026-04-09</lastmod>
-    <changefreq>always</changefreq>
-    <priority>0.5</priority>
+    <loc>https://oopsipleasured.in/privacy</loc>
+    <lastmod>2026-04-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://oopsipleasured.in/wishlist</loc>
-    <lastmod>2026-04-09</lastmod>
-    <changefreq>always</changefreq>
-    <priority>0.5</priority>
+    <loc>https://oopsipleasured.in/terms</loc>
+    <lastmod>2026-04-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
   </url>
+
 </urlset>
