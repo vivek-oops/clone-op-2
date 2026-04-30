@@ -49,7 +49,7 @@ const Footer = () => {
               <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter" className="text-muted-foreground hover:text-primary transition-colors disabled:opacity-50">
                 <Twitter className="w-5 h-5" />
               </a>
-              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="text-muted-foreground hover:text-primary transition-colors disabled:opacity-50">
+              <a href="https://www.facebook.com/share/1CdWXFqhic/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="text-muted-foreground hover:text-primary transition-colors disabled:opacity-50">
                 <Facebook className="w-5 h-5" />
               </a>
             </div>
