@@ -11,7 +11,7 @@ const SITE_TITLE = 'oops!Pleasured - Premium Intimate Wellness';  // ← Default
 const SITE_DESCRIPTION = 'Discreet delivery, premium quality intimate wellness products. Explore our curated collection for better self-care and confidence.';  // ← Default description
 const SITE_URL = typeof window !== 'undefined' ? window.location.origin : ''; // ← Auto-detects domain
 const ABSOLUTE_SITE_URL = 'https://oopsipleasured.in';
-const DEFAULT_OG_IMAGE = 'https://oopsipleasured.in/default-og-image.jpg';        // ← Add a 1200x630px image in /public folder
+const DEFAULT_OG_IMAGE = '/default-og-image.jpg';
 
 // ===== CHANGE 2/3: Define the props the component accepts =====
 interface SEOProps {
@@ -61,6 +61,7 @@ export const SEO = ({
       <meta property="og:url" content={url} />
       <meta property="og:type" content={ogType} />
       <meta property="og:image" content={image} />
+      <meta name="twitter:image" content={image} />
     </Helmet>
   );
 };
