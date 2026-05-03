@@ -6,7 +6,7 @@ export const OrganizationStructuredData = () => {
     "@type": "Organization",
     "name": "oops!Pleasured",
     "url": "https://oopsipleasured.in",
-    "logo": "https://oopsipleasured.in/favicon.ico",
+    "logo": "https://oopsipleasured.in/default-og-image.jpg",
     "description": "Premium adult wellness products with 100% discreet packaging, private billing, and free shipping above ₹999.",
     "address": {
       "@type": "PostalAddress",
