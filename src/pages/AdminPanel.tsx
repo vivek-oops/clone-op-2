@@ -258,6 +258,7 @@ const AdminPanel = () => {
   const [isBlogModalOpen, setIsBlogModalOpen] = useState(false);
   const [editingBlog, setEditingBlog] = useState<BlogPost | null>(null);
   const [blogTitle, setBlogTitle] = useState('');
+  const [blogExcerpt, setBlogExcerpt] = useState('');
   const [blogContent, setBlogContent] = useState('');
   const [featuredImage, setFeaturedImage] = useState('');
   const [isUploadingImage, setIsUploadingImage] = useState(false);
@@ -292,6 +293,7 @@ const AdminPanel = () => {
     try {
       const payload: Partial<BlogPost> = {
         title: blogTitle,
+        excerpt: blogExcerpt.trim() || null,
         content: blogContent,
         status,
         featured_image: featuredImage,
@@ -323,6 +325,7 @@ const AdminPanel = () => {
   const resetBlogForm = () => {
     setEditingBlog(null);
     setBlogTitle('');
+    setBlogExcerpt('');
     setBlogContent('');
     setFeaturedImage('');
     setLinkedProductIds([]);
@@ -336,6 +339,7 @@ const AdminPanel = () => {
   const openEditBlog = (post: BlogPost) => {
     setEditingBlog(post);
     setBlogTitle(post.title || '');
+    setBlogExcerpt(post.excerpt || '');
     setBlogContent(post.content || '');
     setFeaturedImage(post.featured_image || '');
     setLinkedProductIds(post.linked_product_ids || []);
@@ -805,6 +809,19 @@ const AdminPanel = () => {
             <div className="space-y-2">
               <Label>Title</Label>
               <Input value={blogTitle} onChange={(e) => setBlogTitle(e.target.value)} placeholder="Blog Title" />
+            </div>
+            <div className="space-y-2">
+              <div className="flex items-center justify-between gap-4">
+                <Label>Meta Description / Excerpt</Label>
+                <span className="text-xs text-muted-foreground">{blogExcerpt.length}/160</span>
+              </div>
+              <Textarea
+                value={blogExcerpt}
+                onChange={(e) => setBlogExcerpt(e.target.value.slice(0, 160))}
+                placeholder="Write a concise 120-160 character summary for search and social previews."
+                rows={3}
+                maxLength={160}
+              />
             </div>
             <div className="space-y-2">
               <Label>Featured Image</Label>

@@ -6,12 +6,18 @@ import { fetchBlogPosts } from '@/lib/blogApi';
 import AnnouncementBar from '@/components/layout/AnnouncementBar';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
+import { SEO } from '@/components/SEO';
 
 const BlogListing = () => {
   const { data: posts = [] } = useQuery({ queryKey: ['blog-posts'], queryFn: () => fetchBlogPosts(true) });
 
   return (
     <div className="min-h-screen bg-background">
+      <SEO
+        title="Wellness Blog"
+        description="Expert articles on intimate wellness, sexual health, and self-care. 100% discreet and informative guides for adults in India."
+        canonicalUrl="https://oopsipleasured.in/blog"
+      />
       <AnnouncementBar /><Navbar />
       <div className="container py-8">
         <div className="text-center mb-10">

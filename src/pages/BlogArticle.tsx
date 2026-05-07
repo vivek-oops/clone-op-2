@@ -9,6 +9,8 @@ import AnnouncementBar from '@/components/layout/AnnouncementBar';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import { toast } from 'sonner';
+import { SEO } from '@/components/SEO';
+import { ArticleStructuredData } from '@/components/StructuredData';
 
 const BlogArticle = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -18,21 +20,21 @@ const BlogArticle = () => {
     enabled: !!slug,
 });
 
-const linkedIds = post?.linked_product_ids?.filter(Boolean) ?? [];
+  const linkedIds = post?.linked_product_ids?.filter(Boolean) ?? [];
 
-const { data: linkedProducts = [], isLoading: loadingProducts } = useQuery({
-  queryKey: ['linked-products', linkedIds],
-  queryFn: async () => {
-    const { data, error } = await supabase
-      .from('products')
-      .select('*, category:categories(*)')
-      .in('id', linkedIds)
-      .eq('visible', true);
-    if (error) throw error;
-    return (data as Product[]) || [];
-  },
-  enabled: linkedIds.length > 0,
-});
+  const { data: linkedProducts = [], isLoading: loadingProducts } = useQuery({
+    queryKey: ['linked-products', linkedIds],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from('products')
+        .select('*, category:categories(*)')
+        .in('id', linkedIds)
+        .eq('visible', true);
+      if (error) throw error;
+      return (data as Product[]) || [];
+    },
+    enabled: linkedIds.length > 0,
+  });
 
   const handleShare = () => {
     navigator.clipboard.writeText(window.location.href);
@@ -53,8 +55,31 @@ const { data: linkedProducts = [], isLoading: loadingProducts } = useQuery({
     </div>
   );
 
+  const articleUrl = `https://oopsipleasured.in/blog/${post.slug}`;
+  const fallbackDescription = post.content
+    ? post.content.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 152).trimEnd() + '...'
+    : 'Expert wellness advice from oops!Pleasured.';
+  const articleDescription = post.excerpt?.trim() || fallbackDescription;
+  const articleImage = post.featured_image || 'https://oopsipleasured.in/default-og-image.jpg';
+
   return (
     <div className="min-h-screen bg-background">
+      <SEO
+        title={post.title}
+        description={articleDescription}
+        canonicalUrl={articleUrl}
+        ogImage={articleImage}
+        ogType="article"
+      />
+      <ArticleStructuredData article={{
+        headline: post.title,
+        datePublished: post.published_at || post.created_at,
+        dateModified: post.updated_at || post.published_at || post.created_at,
+        image: articleImage,
+        author: post.author_name || 'oops!Pleasured',
+        url: articleUrl,
+        description: articleDescription,
+      }} />
       <AnnouncementBar /><Navbar />
       <div className="container max-w-3xl py-8">
         <Link to="/blog" className="flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground mb-6">

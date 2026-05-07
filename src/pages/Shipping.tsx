@@ -1,14 +1,15 @@
-import { Helmet } from 'react-helmet-async';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
+import { SEO } from '@/components/SEO';
 
 const Shipping = () => {
   return (
     <>
-      <Helmet>
-        <title>Shipping & Delivery | oops!Pleasured</title>
-        <meta name="description" content="Information on our discreet packaging delivery timelines and payment options." />
-      </Helmet>
+      <SEO
+        title="Shipping & Delivery"
+        description="Information on our discreet packaging delivery timelines and payment options."
+        canonicalUrl="https://oopsipleasured.in/shipping"
+      />
       <div className="min-h-screen bg-background flex flex-col">
         <Navbar />
         <main className="flex-1 container py-16 md:py-24 max-w-4xl">
