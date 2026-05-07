@@ -1,14 +1,15 @@
-import { Helmet } from 'react-helmet-async';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
+import { SEO } from '@/components/SEO';
 
 const Terms = () => {
   return (
     <>
-      <Helmet>
-        <title>Terms of Service | oops!Pleasured</title>
-        <meta name="description" content="View our terms of service, payment terms, and liability limits." />
-      </Helmet>
+      <SEO
+        title="Terms of Service"
+        description="View our terms of service, payment terms, and liability limits."
+        canonicalUrl="https://oopsipleasured.in/terms"
+      />
       <div className="min-h-screen bg-background flex flex-col">
         <Navbar />
         <main className="flex-1 container py-16 md:py-24 max-w-4xl">

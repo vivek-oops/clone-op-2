@@ -1,14 +1,15 @@
-import { Helmet } from 'react-helmet-async';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
+import { SEO } from '@/components/SEO';
 
 const Privacy = () => {
   return (
     <>
-      <Helmet>
-        <title>Privacy Policy | oops!Pleasured</title>
-        <meta name="description" content="Our commitment to your privacy, data security, and discreet billing." />
-      </Helmet>
+      <SEO
+        title="Privacy Policy"
+        description="Our commitment to your privacy, data security, and discreet billing."
+        canonicalUrl="https://oopsipleasured.in/privacy"
+      />
       <div className="min-h-screen bg-background flex flex-col">
         <Navbar />
         <main className="flex-1 container py-16 md:py-24 max-w-4xl">

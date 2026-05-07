@@ -16,8 +16,8 @@ import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { toast } from 'sonner';
 import { Star } from 'lucide-react';
-import { Helmet } from 'react-helmet-async';
 import { ProductStructuredData, BreadcrumbStructuredData } from '@/components/StructuredData';
+import { SEO } from '@/components/SEO';
 
 const ProductDetail = () => {
   const { id } = useParams<{ id: string }>();
@@ -92,18 +92,32 @@ const ProductDetail = () => {
     { icon: Award, label: 'Premium materials' },
     { icon: Truck, label: 'Fast delivery' },
   ];
+  const productUrl = `https://oopsipleasured.in/product/${product.id}`;
+  const productImage = product.images?.[0] || ((product as Product & { image?: string | null }).image ?? '') || 'https://oopsipleasured.in/default-og-image.jpg';
+  const productDescription = (product.description || 'Premium intimate wellness product available at oops!Pleasured.')
+    .replace(/\s+/g, ' ')
+    .trim();
+  const productMetaDescription = productDescription.length > 155
+    ? `${productDescription.slice(0, 152).trimEnd()}...`
+    : productDescription;
+  const productAvailability = product.availability === 'available' ? 'InStock' : 'OutOfStock';
 
   return (
     <>
-      <Helmet>
-        <title>{product.name} | oops! Pleasured</title>
-      </Helmet>
+      <SEO
+        fullTitle={`${product.name} | oops! Pleasured`}
+        description={productMetaDescription}
+        canonicalUrl={productUrl}
+        ogImage={productImage}
+        ogType="product"
+      />
       <ProductStructuredData product={{
         name: product.name,
-        description: product.description,
-        image: product.images?.[0] || '',
+        description: productDescription,
+        image: productImage,
         price: product.price,
-        availability: product.availability === 'available' ? 'InStock' : 'OutOfStock'
+        availability: productAvailability,
+        url: productUrl,
       }} />
       <BreadcrumbStructuredData items={[
         { name: 'Home', url: typeof window !== 'undefined' ? window.location.origin : 'https://oopsipleasured.in' },
