@@ -110,10 +110,54 @@
     @apply font-display;
     color: hsl(var(--foreground));
   }
+  .prose-brand h1,
+  .prose-brand h2,
+  .prose-brand h3,
+  .prose-brand h4,
+  .prose-brand h5,
+  .prose-brand h6 {
+    scroll-margin-top: 7rem;
+  }
+  .prose-brand h2 {
+    @apply mt-12 mb-4 text-2xl md:text-3xl font-bold;
+  }
+  .prose-brand h3 {
+    @apply mt-8 mb-3 text-xl md:text-2xl font-semibold;
+  }
   .prose-brand p {
+    @apply my-4 leading-8 text-base md:text-lg;
     color: hsl(var(--muted-foreground));
   }
+  .prose-brand ul,
+  .prose-brand ol {
+    @apply my-5 pl-6 space-y-2;
+    color: hsl(var(--muted-foreground));
+  }
+  .prose-brand ul {
+    list-style-type: disc;
+  }
+  .prose-brand ol {
+    list-style-type: decimal;
+  }
+  .prose-brand li {
+    @apply pl-1 leading-8 text-base md:text-lg;
+  }
+  .prose-brand hr {
+    @apply my-8 border-border;
+  }
   .prose-brand a {
+    @apply font-medium underline underline-offset-4 decoration-primary/40 transition-colors;
     color: hsl(var(--primary));
+  }
+  .prose-brand a:hover {
+    color: hsl(var(--foreground));
+  }
+  .prose-brand strong {
+    color: hsl(var(--foreground));
+  }
+  .prose-brand code {
+    @apply rounded px-1.5 py-0.5 text-sm;
+    background-color: hsl(var(--secondary));
+    color: hsl(var(--foreground));
   }
 }

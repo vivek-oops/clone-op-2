@@ -1,4 +1,5 @@
-import { useParams, Link } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useParams, Link, useLocation, useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { Calendar, User, ArrowLeft, Share2 } from 'lucide-react';
 import { fetchBlogPost } from '@/lib/blogApi';
@@ -11,8 +12,11 @@ import Footer from '@/components/layout/Footer';
 import { toast } from 'sonner';
 import { SEO } from '@/components/SEO';
 import { ArticleStructuredData } from '@/components/StructuredData';
+import { renderBlogContent } from '@/lib/blogContent';
 
 const BlogArticle = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
   const { slug } = useParams<{ slug: string }>();
   const { data: post, isLoading } = useQuery({
     queryKey: ['blog-post', slug],
@@ -41,6 +45,40 @@ const BlogArticle = () => {
     toast.success('Link copied!');
   };
 
+  const handleContentClick = (event: React.MouseEvent<HTMLDivElement>) => {
+    const target = event.target as HTMLElement | null;
+    const anchor = target?.closest('a');
+    if (!anchor?.getAttribute('href')) return;
+
+    const rawHref = anchor.getAttribute('href')!;
+
+    if (rawHref.startsWith('#')) {
+      event.preventDefault();
+      const section = document.getElementById(rawHref.slice(1));
+      if (section) {
+        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        history.replaceState(null, '', `${location.pathname}${rawHref}`);
+      }
+      return;
+    }
+
+    const absoluteUrl = new URL(anchor.href, window.location.origin);
+    if (absoluteUrl.origin !== window.location.origin) return;
+
+    event.preventDefault();
+    navigate(`${absoluteUrl.pathname}${absoluteUrl.search}${absoluteUrl.hash}`);
+  };
+
+  const renderedContent = renderBlogContent(post?.content);
+
+  useEffect(() => {
+    if (!location.hash || !renderedContent) return;
+    const section = document.getElementById(location.hash.slice(1));
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }, [location.hash, renderedContent]);
+
   if (isLoading) return (
     <div className="min-h-screen bg-background">
       <AnnouncementBar /><Navbar />
@@ -61,6 +99,9 @@ const BlogArticle = () => {
     : 'Expert wellness advice from oops!Pleasured.';
   const articleDescription = post.excerpt?.trim() || fallbackDescription;
   const articleImage = post.featured_image || 'https://oopsipleasured.in/default-og-image.jpg';
+  const orderedLinkedProducts = linkedProducts
+    .slice()
+    .sort((a, b) => linkedIds.indexOf(a.id) - linkedIds.indexOf(b.id));
 
   return (
     <div className="min-h-screen bg-background">
@@ -102,8 +143,12 @@ const BlogArticle = () => {
 
         <h1 className="font-display text-3xl md:text-4xl font-bold mb-6">{post.title}</h1>
 
-        {post.content && (
-          <div className="prose-brand mb-12" dangerouslySetInnerHTML={{ __html: post.content }} />
+        {renderedContent && (
+          <div
+            className="prose-brand mb-12"
+            onClick={handleContentClick}
+            dangerouslySetInnerHTML={{ __html: renderedContent }}
+          />
         )}
 
 
@@ -112,9 +157,9 @@ const BlogArticle = () => {
             <h2 className="font-display text-2xl font-bold mb-6">Related Products</h2>
             {loadingProducts ? (
               <p className="text-sm text-muted-foreground">Loading products...</p>
-            ) : linkedProducts.length > 0 ? (
+            ) : orderedLinkedProducts.length > 0 ? (
               <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                {linkedProducts.map(product => (
+                {orderedLinkedProducts.map(product => (
                   <ProductCard key={product.id} product={product} />
                 ))}
               </div>
