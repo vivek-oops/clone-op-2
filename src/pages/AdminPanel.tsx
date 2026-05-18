@@ -840,6 +840,9 @@ const AdminPanel = () => {
                 placeholder="Write your blog content here..."
                 className="min-h-[200px]"
               />
+              <p className="text-xs text-muted-foreground">
+                Use Markdown like <code>## Heading</code>, <code>- bullet</code>, <code>[Product link](/product/id)</code>, or <code>[Jump to FAQ](#faq)</code>.
+              </p>
             </div>
             <div className="space-y-2">
               <Label htmlFor="linked-products">Link Products</Label>
