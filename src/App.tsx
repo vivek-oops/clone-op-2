@@ -23,6 +23,7 @@ import Returns from "./pages/Returns";
 import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
 import { HelmetProvider } from "react-helmet-async";
+import AgeGate from "./components/AgeGate";
 
 const queryClient = new QueryClient();
 
@@ -34,6 +35,7 @@ const App = () => (
         <TooltipProvider>
           <Toaster />
           <Sonner />
+          <AgeGate />
           <BrowserRouter>
             <Routes>
               <Route path="/" element={<Index />} />
